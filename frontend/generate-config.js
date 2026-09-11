@@ -21,7 +21,13 @@ try {
   if (e.code !== 'ENOENT') {
     throw new Error(e);
   } else {
-    console.log(`${CONFIG_FILE_NAME} file not found, using default config`);
+    try {
+      const sampleConfig = fs.readFileSync('mempool-frontend-config.sample.json');
+      configContent = JSON.parse(sampleConfig);
+      console.log(`${CONFIG_FILE_NAME} file not found, using mempool-frontend-config.sample.json`);
+    } catch (sampleErr) {
+      console.log(`${CONFIG_FILE_NAME} file not found, using default config`);
+    }
   }
 }
 

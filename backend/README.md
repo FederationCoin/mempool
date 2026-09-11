@@ -1,10 +1,10 @@
 # Mempool Backend
 
-These instructions are mostly intended for developers. 
+These instructions are for developers running the FederationCoin explorer backend.
 
-If you choose to use these instructions for a production setup, be aware that you will still probably need to do additional configuration for your specific OS, environment, use-case, etc. We do our best here to provide a good starting point, but only proceed if you know what you're doing. Mempool only provides support for custom setups to project sponsors through [Mempool Enterprise®](https://mempool.space/enterprise).
+If you choose to use these instructions for a production setup, be aware that you will still probably need to do additional configuration for your OS and environment. This fork does not offer Mempool Enterprise. Corresponding source: https://github.com/FederationCoin/mempool
 
-See other ways to set up Mempool on [the main README](/../../#installation-methods).
+See other ways to set up the explorer on [the main README](../README.md).
 
 Jump to a section in this doc:
 - [Set Up the Backend](#setup)
@@ -12,25 +12,18 @@ Jump to a section in this doc:
 
 ## Setup
 
-### 1. Clone Mempool Repository
-
-Get the latest Mempool code:
+### 1. Clone this repository
 
 ```
-git clone https://github.com/mempool/mempool
+git clone https://github.com/FederationCoin/mempool
 cd mempool
 ```
 
-Check out the latest release:
+Work on the `federationcoin` branch.
 
-```
-latestrelease=$(curl -s https://api.github.com/repos/mempool/mempool/releases/latest|grep tag_name|head -1|cut -d '"' -f4)
-git checkout $latestrelease
-```
+### 2. Configure FederationCoin
 
-### 2. Configure Bitcoin Core
-
-Turn on `txindex`, enable RPC, and set RPC credentials in `bitcoin.conf`:
+Turn on `txindex`, enable RPC, and set RPC credentials. Run **testnet** (`federationcoind -testnet`, RPC **35332**). Dummy MAIN RPC 4094 is not launched.
 
 ```
 txindex=1

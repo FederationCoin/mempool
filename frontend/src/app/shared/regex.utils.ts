@@ -33,73 +33,71 @@ const ADDRESS_CHARS: {
   };
 } = {
   mainnet: {
-    base58: `[13]` // Starts with a single 1 or 3
+    base58: `[F7]` // F is P2PKH (version 36), 7 is P2SH (version 16)
       + BASE58_CHARS
-      + `{26,33}`, // Repeat the previous char 26-33 times.
-      // Version byte 0x00 (P2PKH) can be as short as 27 characters, up to 34 length
-      // P2SH must be 34 length
+      + `{26,33}`,
     bech32: `(?:`
-        + `bc1` // Starts with bc1
+        + `fcn1`
         + BECH32_CHARS_LW
-        + `{6,100}` // As per bech32, 6 char checksum is minimum
+        + `{6,100}`
       + `|`
-        + `BC1` // All upper case version
+        + `FCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
   },
   testnet: {
-    base58: `[mn2]` // Starts with a single m, n, or 2 (P2PKH is m or n, 2 is P2SH)
+    base58: `[f2]` // f is P2PKH (version 95), 2 is P2SH (version 197)
       + BASE58_CHARS
-      + `{33,34}`, // m|n is 34 length, 2 is 35 length (We match the first letter separately)
+      + `{33,34}`,
     bech32: `(?:`
-        + `tb1` // Starts with tb1
+        + `tfcn1`
         + BECH32_CHARS_LW
-        + `{6,100}` // As per bech32, 6 char checksum is minimum
+        + `{6,100}`
       + `|`
-        + `TB1` // All upper case version
+        + `TFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
   },
   testnet4: {
-    base58: `[mn2]` // Starts with a single m, n, or 2 (P2PKH is m or n, 2 is P2SH)
+    base58: `[f2]`
       + BASE58_CHARS
-      + `{33,34}`, // m|n is 34 length, 2 is 35 length (We match the first letter separately)
+      + `{33,34}`,
     bech32: `(?:`
-        + `tb1` // Starts with tb1
+        + `tfcn1`
         + BECH32_CHARS_LW
-        + `{6,100}` // As per bech32, 6 char checksum is minimum
+        + `{6,100}`
       + `|`
-        + `TB1` // All upper case version
+        + `TFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
   },
   signet: {
-    base58: `[mn2]`
+    base58: `[f2]`
       + BASE58_CHARS
       + `{33,34}`,
     bech32: `(?:`
-        + `tb1` // Starts with tb1
+        + `tfcn1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `TB1` // All upper case version
+        + `TFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
   },
   regtest: {
-    base58: `[mn2]` // Same as testnet
+    base58: `[f2]`
       + BASE58_CHARS
       + `{33,34}`,
     bech32: `(?:`
-        + `bcrt1` // Starts with bcrt1
+        + `fcnrt1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `BCRT1` // All upper case version
+        + `FCNRT1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
@@ -183,7 +181,7 @@ function isNetworkAvailable(network: Network, env: Env): boolean {
     case 'liquidtestnet':
       return env.LIQUID_TESTNET_ENABLED === true;
     case 'mainnet':
-      return true; // There is no "MAINNET_ENABLED" flag
+      return env.MAINNET_ENABLED === true;
     default:
       return false;
   }
@@ -209,7 +207,12 @@ export function getTargetUrl(toNetwork: Network, address: string, env: Env): str
   }
   if (toNetwork === 'mainnet' || toNetwork === 'testnet' || toNetwork === 'testnet4' || toNetwork === 'signet' || toNetwork === 'regtest') {
     targetUrl = env.MEMPOOL_WEBSITE_URL;
-    targetUrl += (toNetwork === 'mainnet' ? '' : `/${toNetwork}`);
+    const root = env.ROOT_NETWORK || '';
+    if (toNetwork === 'mainnet') {
+      targetUrl += (root && root !== 'mainnet' ? '/mainnet' : '');
+    } else if (toNetwork !== root) {
+      targetUrl += `/${toNetwork}`;
+    }
     targetUrl += '/address/';
     targetUrl += address;
   }

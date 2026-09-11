@@ -179,7 +179,7 @@ const defaults: IConfig = {
   'MEMPOOL': {
     'ENABLED': true,
     'OFFICIAL': false,
-    'NETWORK': 'mainnet',
+    'NETWORK': 'testnet',
     'BACKEND': 'none',
     'HTTP_PORT': 8999,
     'UNIX_SOCKET_PATH': '',
@@ -236,22 +236,22 @@ const defaults: IConfig = {
   },
   'CORE_RPC': {
     'HOST': '127.0.0.1',
-    'PORT': 8332,
+    'PORT': 35332,
     'USERNAME': 'mempool',
     'PASSWORD': 'mempool',
     'TIMEOUT': 60000,
     'COOKIE': false,
-    'COOKIE_PATH': '/bitcoin/.cookie',
+    'COOKIE_PATH': '/federationcoin/.cookie',
     'DEBUG_LOG_PATH': '',
   },
   'SECOND_CORE_RPC': {
     'HOST': '127.0.0.1',
-    'PORT': 8332,
+    'PORT': 35332,
     'USERNAME': 'mempool',
     'PASSWORD': 'mempool',
     'TIMEOUT': 60000,
     'COOKIE': false,
-    'COOKIE_PATH': '/bitcoin/.cookie'
+    'COOKIE_PATH': '/federationcoin/.cookie'
   },
   'DATABASE': {
     'ENABLED': true,
@@ -304,10 +304,10 @@ const defaults: IConfig = {
     'PASSWORD': ''
   },
   'EXTERNAL_DATA_SERVER': {
-    'MEMPOOL_API': 'https://mempool.space/api/v1',
-    'MEMPOOL_ONION': 'http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api/v1',
-    'LIQUID_API': 'https://liquid.network/api/v1',
-    'LIQUID_ONION': 'http://liquidmom47f6s3m53ebfxn47p76a6tlnxib3wp6deux7wuzotdr6cyd.onion/api/v1'
+    'MEMPOOL_API': '',
+    'MEMPOOL_ONION': '',
+    'LIQUID_API': '',
+    'LIQUID_ONION': ''
   },
   'MAXMIND': {
     'ENABLED': false,
@@ -333,7 +333,7 @@ const defaults: IConfig = {
     'BATCH_QUERY_BASE_SIZE': 5000,
   },
   'FIAT_PRICE': {
-    'ENABLED': true,
+    'ENABLED': false,
     'PAID': false,
     'API_KEY': '',
   },

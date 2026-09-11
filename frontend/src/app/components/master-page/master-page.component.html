@@ -29,8 +29,7 @@
         }
       }
       @if (!enterpriseInfo || enterpriseInfo.dualLogo) {
-        <img src="/resources/mempooldotguide.png" alt="Custom logo" height="35px" class="mr-3">
-        <app-svg-images *ngIf="officialMempoolSpace" name="officialMempoolSpace" viewBox="0 0 500 126"></app-svg-images>
+        <span class="brand-text">FederationCoin</span>
       }
       <div class="connection-badge">
         <div class="badge bg-warning" *ngIf="connectionState.val === 0" i18n="master-page.offline">Offline</div>
@@ -50,8 +49,7 @@
         }
       }
       @if (!enterpriseInfo || enterpriseInfo.dualLogo) {
-        <img src="/resources/mempooldotguide.png" alt="Custom logo" height="35px" class="mr-3">
-        <app-svg-images *ngIf="officialMempoolSpace" name="officialMempoolSpace" viewBox="0 0 500 126"></app-svg-images>
+        <span class="brand-text">FederationCoin</span>
       }
       <div class="connection-badge">
         <div class="badge bg-warning" *ngIf="connectionState.val === 0" i18n="master-page.offline">Offline</div>
@@ -65,9 +63,9 @@
       <app-svg-images class="d-flex justify-content-center align-items-center current-network-svg" [name]="network.val === '' ? 'bitcoin' : network.val" width="20" height="20" viewBox="0 0 65 65"></app-svg-images>
     </button>
     <div ngbDropdownMenu [ngClass]="{'dropdown-menu-end' : isMobile}">
-      <a ngbDropdownItem *ngIf="env.MAINNET_ENABLED" class="mainnet" [routerLink]="networkPaths['mainnet'] || '/'"><app-svg-images name="bitcoin" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Mainnet</a>
+      <a ngbDropdownItem *ngIf="env.MAINNET_ENABLED" class="mainnet" [class.active]="network.val === ''" [routerLink]="networkPaths['mainnet'] || (env.ROOT_NETWORK && env.ROOT_NETWORK !== 'mainnet' ? '/mainnet' : '/')"><app-svg-images name="bitcoin" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Mainnet (placeholder)</a>
       <a ngbDropdownItem *ngIf="env.SIGNET_ENABLED" class="signet" [class.active]="network.val === 'signet'" [routerLink]="networkPaths['signet'] || '/signet'"><app-svg-images name="signet" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Signet</a>
-      <a ngbDropdownItem *ngIf="env.TESTNET_ENABLED" class="testnet" [class.active]="network.val === 'testnet'" [routerLink]="networkPaths['testnet'] || '/testnet'"><app-svg-images name="testnet" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Testnet3</a>
+      <a ngbDropdownItem *ngIf="env.TESTNET_ENABLED" class="testnet" [class.active]="network.val === 'testnet'" [routerLink]="networkPaths['testnet'] || (env.ROOT_NETWORK === 'testnet' ? '/' : '/testnet')"><app-svg-images name="testnet" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Testnet</a>
       <a ngbDropdownItem *ngIf="env.TESTNET4_ENABLED" class="testnet4" [class.active]="network.val === 'testnet4'" [routerLink]="networkPaths['testnet4'] || '/testnet4'"><app-svg-images name="testnet4" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Testnet4</a>
       <a ngbDropdownItem *ngIf="env.REGTEST_ENABLED" class="regtest" [class.active]="network.val === 'regtest'" [routerLink]="networkPaths['regtest'] || '/regtest'"><app-svg-images name="regtest" width="22" height="22" viewBox="0 0 65 65" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Regtest</a>
       <a [href]="env.LIQUID_WEBSITE_URL + urlLanguage + (networkPaths['liquid'] || '')" ngbDropdownItem *ngIf="env.LIQUID_ENABLED" class="liquid" [class.active]="network.val === 'liquid'"><app-svg-images name="liquid" width="22" height="22" viewBox="0 0 125 125" style="width: 25px; height: 25px;" class="mainnet me-1"></app-svg-images> Liquid</a>
@@ -124,7 +122,7 @@
   <div class="empty-sidenav"><!-- empty sidenav needed to push footer down the screen --></div>
 
   <div class="flex-grow-1 d-flex flex-column">
-    <app-testnet-alert *ngIf="network.val === 'testnet' || network.val === 'testnet4' || network.val === 'signet'"></app-testnet-alert>
+    <app-federation-alert></app-federation-alert>
 
     <main style="min-width: 375px; max-width: 100vw">
       <router-outlet></router-outlet>

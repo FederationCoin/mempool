@@ -1,12 +1,25 @@
 version: "3.7"
 
+# Build images from this FederationCoin fork. Do not use mempool.space or
+# ghcr.io/retropex as the product image. Default stack is testnet (RPC 35332).
+# Dummy MAIN (RPC 4094) is not launched; do not point CORE_RPC at it.
+
 services:
   web:
     environment:
       FRONTEND_HTTP_PORT: "8080"
       BACKEND_MAINNET_HTTP_HOST: "api"
       AUDIT: "true"
-    image: ghcr.io/retropex/mempoolfrontend:v3.2.0
+      TESTNET_ENABLED: "true"
+      MAINNET_ENABLED: "true"
+      ROOT_NETWORK: "testnet"
+      MEMPOOL_WEBSITE_URL: "https://mempool.federationcoin.org"
+      HISTORICAL_PRICE: "false"
+      ACCELERATOR: "false"
+      ACCELERATOR_BUTTON: "false"
+      LIGHTNING: "false"
+      SERVICES_API: ""
+    image: federationcoin-mempool-frontend:local
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 1m
@@ -21,9 +34,10 @@ services:
       start_period: 20s
   api:
     environment:
+      MEMPOOL_NETWORK: "testnet"
       MEMPOOL_BACKEND: "none"
       CORE_RPC_HOST: "172.27.0.1"
-      CORE_RPC_PORT: "8332"
+      CORE_RPC_PORT: "35332"
       CORE_RPC_USERNAME: "mempool"
       CORE_RPC_PASSWORD: "mempool"
       DATABASE_ENABLED: "true"
@@ -35,7 +49,7 @@ services:
       MEMPOOL_BLOCKS_SUMMARIES_INDEXING: "true"
       MEMPOOL_GOGGLES_INDEXING: "true"
       MEMPOOL_AUDIT: "true"
-    image: ghcr.io/retropex/mempoolbackend:v3.2.0
+    image: federationcoin-mempool-backend:local
     user: "1000:1000"
     restart: on-failure
     stop_grace_period: 1m

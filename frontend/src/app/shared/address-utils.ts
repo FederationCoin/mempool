@@ -24,38 +24,38 @@ export type AddressType = 'fee'
 const ADDRESS_PREFIXES = {
   mainnet: {
     base58: {
-      pubkey: ['1'],
-      script: ['3'],
+      pubkey: ['F'],
+      script: ['7'],
     },
-    bech32: 'bc1',
+    bech32: 'fcn1',
   },
   testnet: {
     base58: {
-      pubkey: ['m', 'n'],
-      script: '2',
+      pubkey: ['f'],
+      script: ['2'],
     },
-    bech32: 'tb1',
+    bech32: 'tfcn1',
   },
   testnet4: {
     base58: {
-      pubkey: ['m', 'n'],
-      script: '2',
+      pubkey: ['f'],
+      script: ['2'],
     },
-    bech32: 'tb1',
+    bech32: 'tfcn1',
   },
   signet: {
     base58: {
-      pubkey: ['m', 'n'],
-      script: '2',
+      pubkey: ['f'],
+      script: ['2'],
     },
-    bech32: 'tb1',
+    bech32: 'tfcn1',
   },
   regtest: {
     base58: {
-      pubkey: ['m', 'n'],
-      script: '2',
+      pubkey: ['f'],
+      script: ['2'],
     },
-    bech32: 'bcrt1',
+    bech32: 'fcnrt1',
   },
   liquid: {
     base58: {

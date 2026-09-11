@@ -13,7 +13,7 @@ export class NavigationService {
   networkModules = {
     bitcoin: {
       subnets: [
-        { name: 'mainnet', path: '' },
+        { name: 'mainnet', path: (this.stateService.env.ROOT_NETWORK && this.stateService.env.ROOT_NETWORK !== 'mainnet') ? '/mainnet' : '' },
         { name: 'testnet', path: this.stateService.env.ROOT_NETWORK === 'testnet' ? '/' : '/testnet' },
         { name: 'testnet4', path: this.stateService.env.ROOT_NETWORK === 'testnet4' ? '/' : '/testnet4' },
         { name: 'signet', path: this.stateService.env.ROOT_NETWORK === 'signet' ? '/' : '/signet' },
@@ -90,7 +90,7 @@ export class NavigationService {
       }
       if (route.url?.length) {
         path = [path, ...route.url.map(segment => segment.path).filter(path => {
-          return path.length && !['testnet', 'testnet4', 'signet', 'regtest'].includes(path);
+          return path.length && !['testnet', 'testnet4', 'signet', 'regtest', 'mainnet'].includes(path);
         })].join('/');
       }
       route = route.firstChild;

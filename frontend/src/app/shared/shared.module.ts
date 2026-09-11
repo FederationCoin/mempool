@@ -107,6 +107,7 @@ import { ConfirmationsComponent } from '@app/shared/components/confirmations/con
 import { ToggleComponent } from '@app/shared/components/toggle/toggle.component';
 import { GeolocationComponent } from '@app/shared/components/geolocation/geolocation.component';
 import { TestnetAlertComponent } from '@app/shared/components/testnet-alert/testnet-alert.component';
+import { FederationAlertComponent } from '@app/shared/components/federation-alert/federation-alert.component';
 import { LiquidIncidentAlertComponent } from '@app/shared/components/liquid-incident-alert/liquid-incident-alert.component';
 import { GlobalFooterComponent } from '@app/shared/components/global-footer/global-footer.component';
 import { MempoolErrorComponent } from '@app/shared/components/mempool-error/mempool-error.component';
@@ -236,6 +237,7 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
     ToggleComponent,
     GeolocationComponent,
     TestnetAlertComponent,
+    FederationAlertComponent,
     LiquidIncidentAlertComponent,
     GlobalFooterComponent,
     MiningPoolComponent,
@@ -393,6 +395,7 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
     ToggleComponent,
     GeolocationComponent,
     TestnetAlertComponent,
+    FederationAlertComponent,
     LiquidIncidentAlertComponent,
     MiningPoolComponent,
     PreviewTitleComponent,

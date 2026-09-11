@@ -37,6 +37,12 @@ footer .row.main .branding .btn {
   color: var(--fg) !important;
 }
 
+footer .brand-text {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
 footer .row.main .branding button.account {
   background-color: var(--secondary);
 }

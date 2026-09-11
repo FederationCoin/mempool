@@ -55,7 +55,10 @@ export class QrcodeComponent implements AfterViewInit {
     if (
       this.data.indexOf('bc1') === 0 ||
       this.data.indexOf('tb1') === 0 ||
-      this.data.indexOf('bcrt1') === 0
+      this.data.indexOf('bcrt1') === 0 ||
+      this.data.indexOf('fcn1') === 0 ||
+      this.data.indexOf('tfcn1') === 0 ||
+      this.data.indexOf('fcnrt1') === 0
     ) {
       address.toUpperCase();
     }
