@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   print-backend-sha:
-    runs-on: mempool-ci
+    runs-on: ubuntu-latest
     name: Get block height
     steps:
       - name: Checkout

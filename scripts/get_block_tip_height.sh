@@ -1,25 +1,30 @@
-BASE_HEIGHT=$(curl -sk https://node202.tk7.mempool.space/api/v1/blocks/tip/height)
-IN_SYNC=true
-echo "Base height (node202.tk7): $BASE_HEIGHT"
+#!/bin/sh
+# Public explorer is a single host. Do not query the Retropex
+# nodeNNN.{fmt,va1,fra,tk7}.mempool.space grid.
+# Do not use origin.mempool.federationcoin.org (CloudFront origin, HTTP, not public).
+set -eu
 
-for LOCATION in fmt va1 fra tk7
-do
-  for NODE in 201 202 203 204 205 206
-  do
-    NODE_HEIGHT=$(curl -sk https://node$NODE.$LOCATION.mempool.space/api/v1/blocks/tip/height)
-    echo $(echo node$NODE.$LOCATION.mempool.space) - $NODE_HEIGHT
-    if [ "$NODE_HEIGHT" -ne "$BASE_HEIGHT" ]; then
-      COUNT=$((BASE_HEIGHT-NODE_HEIGHT))
-      echo $(echo node$NODE.$LOCATION.mempool.space) is not in sync. delta: $COUNT
-      IN_SYNC=false
-    fi
-  done
-done
+URL="https://mempool.federationcoin.org/api/v1/blocks/tip/height"
+BODY=$(curl -fsS "$URL") || {
+  echo "failed to fetch $URL" >&2
+  exit 1
+}
 
-if [ "$IN_SYNC" = false ]; then
-  echo "One or more servers are out of sync. Check the logs."
-  exit -1
-else
-  echo "All servers are in sync."
-fi
+# Fail if the body is not a non-negative integer.
+case "$BODY" in
+  ''|*[!0-9]*)
+    echo "tip height is not a non-negative integer: $BODY" >&2
+    exit 1
+    ;;
+esac
 
+echo "tip height (mempool.federationcoin.org): $BODY"
+
+# Retropex multi-region grid -- not used:
+# BASE_HEIGHT=$(curl -sk https://node202.tk7.mempool.space/api/v1/blocks/tip/height)
+# for LOCATION in fmt va1 fra tk7; do
+#   for NODE in 201 202 203 204 205 206; do
+#     NODE_HEIGHT=$(curl -sk https://node$NODE.$LOCATION.mempool.space/api/v1/blocks/tip/height)
+#     ...
+#   done
+# done

@@ -11,11 +11,16 @@ permissions:
 
 jobs:
   project-automation:
-    uses: mempool/.github/.github/workflows/project-board-automation.yml@1b41bb42b0876d8469dc5c5878711aeffb678266 # master
-    with:
-      project-number: 8
-    secrets:
-      PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
-      PROJECT_ID: ${{ secrets.PROJECT_ID }}
-      STATUS_FIELD_ID: ${{ secrets.STATUS_FIELD_ID }}
-      REVIEW_NEEDED_OPTION_ID: ${{ secrets.REVIEW_NEEDED_OPTION_ID }}
+    # https://projects.federationcoin.org -- not yet provisioned
+    # uses: FederationCoin/.github/.github/workflows/project-board-automation.yml
+    # uses: mempool/.github/.github/workflows/project-board-automation.yml@1b41bb42b0876d8469dc5c5878711aeffb678266 # master
+    if: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: disabled
+        run: echo "project board not yet provisioned"
+        # secrets:
+        #   PROJECT_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+        #   PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        #   STATUS_FIELD_ID: ${{ secrets.STATUS_FIELD_ID }}
+        #   REVIEW_NEEDED_OPTION_ID: ${{ secrets.REVIEW_NEEDED_OPTION_ID }}

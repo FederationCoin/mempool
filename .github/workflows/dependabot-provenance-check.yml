@@ -3,6 +3,8 @@ name: Dependabot Provenance Check
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    branches:
+      - federationcoin
 
 permissions:
   contents: read
