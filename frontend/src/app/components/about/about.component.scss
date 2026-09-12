@@ -39,6 +39,36 @@
     padding: 10px 15px 15px;
   }
 
+  .upstream-copyright {
+    max-width: 550px;
+    margin: 2rem auto 2rem;
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--text-muted, #888);
+
+    summary {
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-muted, #888);
+    }
+
+    .upstream-copyright-body {
+      margin-top: 0.75rem;
+      line-height: 1.45;
+      font-size: 0.8rem;
+      color: var(--text-muted, #888);
+
+      p {
+        margin-bottom: 0.75rem;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+  }
+
   video {
     width: 640px;
     max-width: 90%;
