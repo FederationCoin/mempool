@@ -212,7 +212,7 @@
     </svg>
   </ng-container>
   <ng-container *ngSwitchCase="'federationcoin'">
-    <ng-component *ngTemplateOutlet="federationcoinLogo; context: {$implicit: '#f7931a', width, height, viewBox}"></ng-component>
+    <ng-component *ngTemplateOutlet="federationcoinLogo; context: {$implicit: '#C31822', width, height, viewBox}"></ng-component>
   </ng-container>
   <ng-container *ngSwitchCase="'bitcoin'">
     <ng-component *ngTemplateOutlet="bitcoinLogo; context: {$implicit: '#f7931a', width, height, viewBox}"></ng-component>
@@ -346,7 +346,7 @@
 <ng-template #federationcoinLogo let-color let-width="width" let-height="height" let-viewBox="viewBox">
   <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="viewBox" [attr.width]="width" [attr.height]="height" version="1.1">
     <circle cx="32.5" cy="32.5" r="31" [attr.fill]="color"/>
-    <path fill="#FFF" d="M24 18h12.5c7.2 0 12.5 4.4 12.5 11.2 0 4.6-2.6 8.2-6.8 9.7L46 47h-8.2l-3.2-7.6H32V47h-8V18zm8 14.2h4.3c3.2 0 5.2-1.8 5.2-4.6s-2-4.6-5.2-4.6H32v9.2z"/>
+    <path fill="#FFF" d="M23 17h24v7.2H31.2V31h16V38H31.2V48H23z"/>
   </svg>
 </ng-template>
 
