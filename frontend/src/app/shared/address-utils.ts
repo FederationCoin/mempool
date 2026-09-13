@@ -27,35 +27,35 @@ const ADDRESS_PREFIXES = {
       pubkey: ['F'],
       script: ['7'],
     },
-    bech32: 'fcn1',
+    bech32: 'gfcn1',
   },
   testnet: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'tfcn1',
+    bech32: 'tgfcn1',
   },
   testnet4: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'tfcn1',
+    bech32: 'tgfcn1',
   },
   signet: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'tfcn1',
+    bech32: 'tgfcn1',
   },
   regtest: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'fcnrt1',
+    bech32: 'gfcnrt1',
   },
   liquid: {
     base58: {

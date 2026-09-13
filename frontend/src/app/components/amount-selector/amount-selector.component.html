@@ -1,6 +1,6 @@
 <div [formGroup]="amountForm" class="text-small text-center">
     <select formControlName="mode" class="form-select form-select-sm form-control-secondary form-control mx-auto" style="width: 75px;" (change)="changeMode()">
-        <option value="btc">FCN</option>
+        <option value="btc">GFCN</option>
         <option value="sats" i18n="shared.tokens">tokens</option>
         <option value="fiat" i18n="shared.fiat|Fiat" *ngIf="stateService.env.HISTORICAL_PRICE">Fiat</option>
     </select>

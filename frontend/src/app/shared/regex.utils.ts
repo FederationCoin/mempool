@@ -37,11 +37,11 @@ const ADDRESS_CHARS: {
       + BASE58_CHARS
       + `{26,33}`,
     bech32: `(?:`
-        + `fcn1`
+        + `gfcn1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `FCN1`
+        + `GFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
@@ -51,11 +51,11 @@ const ADDRESS_CHARS: {
       + BASE58_CHARS
       + `{33,34}`,
     bech32: `(?:`
-        + `tfcn1`
+        + `tgfcn1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `TFCN1`
+        + `TGFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
@@ -65,11 +65,11 @@ const ADDRESS_CHARS: {
       + BASE58_CHARS
       + `{33,34}`,
     bech32: `(?:`
-        + `tfcn1`
+        + `tgfcn1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `TFCN1`
+        + `TGFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
@@ -79,11 +79,11 @@ const ADDRESS_CHARS: {
       + BASE58_CHARS
       + `{33,34}`,
     bech32: `(?:`
-        + `tfcn1`
+        + `tgfcn1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `TFCN1`
+        + `TGFCN1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,
@@ -93,11 +93,11 @@ const ADDRESS_CHARS: {
       + BASE58_CHARS
       + `{33,34}`,
     bech32: `(?:`
-        + `fcnrt1`
+        + `gfcnrt1`
         + BECH32_CHARS_LW
         + `{6,100}`
       + `|`
-        + `FCNRT1`
+        + `GFCNRT1`
         + BECH32_CHARS_UP
         + `{6,100}`
       + `)`,

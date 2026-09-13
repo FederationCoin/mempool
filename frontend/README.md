@@ -36,4 +36,4 @@ Put `dist/` on a web server. Sample nginx files are in this repository; operatin
 
 ## Translations
 
-Upstream Transifex project still has Bitcoin-era copy. This fork only changes English chrome (title, banner, ticker FCN). Do not treat remaining “Bitcoin” FAQ strings as FederationCoin docs.
+Upstream Transifex project still has Bitcoin-era copy. This fork only changes English chrome (title, banner, ticker GFCN). Do not treat remaining “Bitcoin” FAQ strings as FederationCoin docs.
