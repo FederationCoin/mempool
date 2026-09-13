@@ -74,8 +74,8 @@ export class PriceChartComponent implements OnInit {
     } else if (this.widget) {
       this.miningWindowPreference = '1y';
     } else {
-      this.seoService.setTitle($localize`:@@price-chart.title:Bitcoin Price`);
-      this.seoService.setDescription($localize`:@@price-chart.description:See the Bitcoin price in USD visualized over time.`);
+      this.seoService.setTitle($localize`:@@price-chart.title:FederationCoin Price`);
+      this.seoService.setDescription($localize`:@@price-chart.description:See the FederationCoin price in USD visualized over time.`);
       this.miningWindowPreference = this.miningService.getDefaultTimespan('1m');
     }
     this.radioGroupForm = this.formBuilder.group({ dateSpan: this.miningWindowPreference });

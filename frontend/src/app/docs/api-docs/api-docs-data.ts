@@ -7737,7 +7737,7 @@ export const restApiDocsData = [
     fragment: 'get-recommended-fees-precise',
     title: 'GET Recommended Fees (Precise)',
     description: {
-      default: 'Returns our currently-suggested feerates with up to 3 decimal places, including sub-sat feerates down to 0.1 s/vb.'
+      default: 'Returns our currently-suggested feerates with up to 3 decimal places, including sub-token feerates down to 0.1 token/vB.'
     },
     urlString: '/v1/fees/precise',
     showConditions: bitcoinNetworks.concat(liquidNetworks),
@@ -12758,7 +12758,7 @@ export const faqData = [
     category: 'basics',
     showConditions: bitcoinNetworks,
     fragment: 'what-is-svb',
-    title: 'What is sat/vB?',
+    title: 'What is token/vB?',
   },
   {
     type: 'category',
@@ -13430,7 +13430,7 @@ export const electrumApiDocsData = [
     fragment: 'mempool-get-fee-histogram',
     title: 'mempool.get_fee_histogram',
     description: {
-      default: 'Returns a histogram of transaction fees in the mempool. Each entry is a pair of [fee_rate, cumulative_vsize] where fee_rate is in satoshis per virtual byte.'
+      default: 'Returns a histogram of transaction fees in the mempool. Each entry is a pair of [fee_rate, cumulative_vsize] where fee_rate is in tokens per virtual byte.'
     },
     showConditions: bitcoinNetworks.concat(liquidNetworks),
     requestExample: '{"jsonrpc":"2.0","id":1,"method":"mempool.get_fee_histogram","params":[]}',
