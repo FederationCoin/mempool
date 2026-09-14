@@ -10,6 +10,7 @@ import { StorageService } from '@app/services/storage.service';
 import { WebsocketResponse } from '@interfaces/websocket.interface';
 import { TxAuditStatus } from '@components/transaction/transaction.component';
 import { MinersService } from '@app/services/miners.service';
+import { httpApiBaseUrl } from '@app/shared/api-host';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +29,7 @@ export class ApiService {
     private storageService: StorageService,
     private minersService: MinersService,
   ) {
-    this.apiBaseUrl = ''; // use relative URL by default
-    if (!stateService.isBrowser) { // except when inside AU SSR process
-      this.apiBaseUrl = this.stateService.env.NGINX_PROTOCOL + '://' + this.stateService.env.NGINX_HOSTNAME + ':' + this.stateService.env.NGINX_PORT;
-    }
+    this.apiBaseUrl = httpApiBaseUrl(this.stateService.env, stateService.isBrowser);
     this.apiBasePath = this.stateService.networkApiPrefix;
     this.stateService.networkChanged$.subscribe(() => {
       this.apiBasePath = this.stateService.networkApiPrefix;
