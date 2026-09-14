@@ -27,35 +27,35 @@ const ADDRESS_PREFIXES = {
       pubkey: ['F'],
       script: ['7'],
     },
-    bech32: 'fcn1',
+    bech32: 'gfcn1',
   },
   testnet: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'tfcn1',
+    bech32: 'tgfcn1',
   },
   testnet4: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'tfcn1',
+    bech32: 'tgfcn1',
   },
   signet: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'tfcn1',
+    bech32: 'tgfcn1',
   },
   regtest: {
     base58: {
       pubkey: ['f'],
       script: ['2'],
     },
-    bech32: 'fcnrt1',
+    bech32: 'gfcnrt1',
   },
   liquid: {
     base58: {
@@ -93,8 +93,9 @@ export function detectAddressType(address: string, network: string): AddressType
     return 'p2pkh';
   } else if (ADDRESS_PREFIXES[network].base58.script.includes(firstChar) && base58Regex.test(address.slice(1))) {
     return 'p2sh';
-  } else if (address.startsWith(ADDRESS_PREFIXES[network].bech32)) {
-    const suffix = address.slice(ADDRESS_PREFIXES[network].bech32.length);
+  } else if (address.toLowerCase().startsWith(ADDRESS_PREFIXES[network].bech32)) {
+    // Bech32 may be all-upper (QR). Mixed case is invalid; we only classify.
+    const suffix = address.toLowerCase().slice(ADDRESS_PREFIXES[network].bech32.length);
     if (p2wpkhRegex.test(suffix)) {
       return 'v0_p2wpkh';
     } else if (p2wshRegex.test(suffix)) {

@@ -10,6 +10,7 @@ import { TransferState, makeStateKey } from '@angular/core';
 import { CacheService } from '@app/services/cache.service';
 import { uncompressDeltaChange, uncompressTx } from '@app/shared/common.utils';
 import { MinersService } from '@app/services/miners.service';
+import { webSocketUrlTemplate } from '@app/shared/api-host';
 
 const OFFLINE_RETRY_AFTER_MS = 2000;
 const OFFLINE_PING_CHECK_AFTER_MS = 30000;
@@ -22,7 +23,7 @@ const initData = makeStateKey('/api/v1/init-data');
 })
 export class WebsocketService {
   private webSocketProtocol = (document.location.protocol === 'https:') ? 'wss:' : 'ws:';
-  private webSocketUrl = this.webSocketProtocol + '//' + document.location.hostname + ':' + document.location.port + '{network}/api/v1/ws';
+  private webSocketUrl: string;
 
   private websocketSubject: WebSocketSubject<WebsocketResponse>;
   private goneOffline = false;
@@ -54,6 +55,13 @@ export class WebsocketService {
     private cacheService: CacheService,
     private minersService: MinersService,
   ) {
+    this.webSocketUrl = webSocketUrlTemplate(
+      this.stateService.env,
+      this.stateService.isBrowser,
+      this.webSocketProtocol,
+      document.location.hostname,
+      document.location.port,
+    );
     if (!this.stateService.isBrowser) {
       // @ts-ignore
       this.websocketSubject = { next: () => {}};

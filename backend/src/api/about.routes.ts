@@ -78,6 +78,11 @@ class AboutRoutes {
         }
       })
       .get(config.MEMPOOL.API_URL_PREFIX + 'services/sponsors', async (req, res) => {
+        if (!config.MEMPOOL_SERVICES.API) {
+          res.header('Cache-Control', 'no-store');
+          res.status(200).json([]);
+          return;
+        }
         const url = `${config.MEMPOOL_SERVICES.API}/sponsors`;
         try {
           const response = await axios.get(url, { responseType: 'stream', timeout: 10000 });
@@ -90,6 +95,10 @@ class AboutRoutes {
       .get(config.MEMPOOL.API_URL_PREFIX + 'services/account/images/:username/:md5', async (req, res) => {
         if (!PROXY_PATH_SEGMENT_REGEX.test(req.params.username) || !PROXY_PATH_SEGMENT_REGEX.test(req.params.md5)) {
           res.status(400).end();
+          return;
+        }
+        if (!config.MEMPOOL_SERVICES.API) {
+          res.status(404).end();
           return;
         }
 

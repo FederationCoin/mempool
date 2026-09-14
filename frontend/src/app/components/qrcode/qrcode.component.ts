@@ -51,16 +51,18 @@ export class QrcodeComponent implements AfterViewInit {
       return;
     }
 
-    const address = this.data;
+    // BIP173: QR bech32 as all-upper. Match either case (GFCN1 / gfcn1).
+    let address = this.data;
+    const lower = this.data.toLowerCase();
     if (
-      this.data.indexOf('bc1') === 0 ||
-      this.data.indexOf('tb1') === 0 ||
-      this.data.indexOf('bcrt1') === 0 ||
-      this.data.indexOf('fcn1') === 0 ||
-      this.data.indexOf('tfcn1') === 0 ||
-      this.data.indexOf('fcnrt1') === 0
+      lower.startsWith('bc1') ||
+      lower.startsWith('tb1') ||
+      lower.startsWith('bcrt1') ||
+      lower.startsWith('gfcn1') ||
+      lower.startsWith('tgfcn1') ||
+      lower.startsWith('gfcnrt1')
     ) {
-      address.toUpperCase();
+      address = this.data.toUpperCase();
     }
 
     QRCode.toCanvas(this.canvas.nativeElement, address, opts, (error: any) => {

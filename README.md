@@ -12,7 +12,7 @@ Public explorer: [mempool.federationcoin.org](https://mempool.federationcoin.org
 | --- | --- | --- |
 | RPC | 35332 | 4094 |
 | P2P | 35333 | 4095 |
-| Bech32 HRP | `tfcn` | `fcn` |
+| Bech32 HRP | `tgfcn` | `gfcn` |
 
 Dummy MAIN in the UI is **not launched**. Do not mine default main as if it went live. Address lookup needs an Electrum/electrs server later; the default Docker stack uses `MEMPOOL_BACKEND=none` (blocks and mempool via RPC only).
 
