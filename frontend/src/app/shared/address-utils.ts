@@ -93,8 +93,9 @@ export function detectAddressType(address: string, network: string): AddressType
     return 'p2pkh';
   } else if (ADDRESS_PREFIXES[network].base58.script.includes(firstChar) && base58Regex.test(address.slice(1))) {
     return 'p2sh';
-  } else if (address.startsWith(ADDRESS_PREFIXES[network].bech32)) {
-    const suffix = address.slice(ADDRESS_PREFIXES[network].bech32.length);
+  } else if (address.toLowerCase().startsWith(ADDRESS_PREFIXES[network].bech32)) {
+    // Bech32 may be all-upper (QR). Mixed case is invalid; we only classify.
+    const suffix = address.toLowerCase().slice(ADDRESS_PREFIXES[network].bech32.length);
     if (p2wpkhRegex.test(suffix)) {
       return 'v0_p2wpkh';
     } else if (p2wshRegex.test(suffix)) {
