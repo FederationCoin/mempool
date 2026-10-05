@@ -60,4 +60,53 @@ describe('Common', () => {
       expect(result.feeRange[6]).toBeGreaterThan(0); // max fee
     });
   });
+
+  describe('header v2', () => {
+    const legacy80 = '01000000' + '00'.repeat(76);
+    const v2Bit80 = '00000080' + '00'.repeat(76);
+    const v2Extra =
+      '01000000' + // nonce2 = 1
+      '02000000' + // nonce3 = 2
+      'aa'.repeat(16) + // extranonce
+      '00'.repeat(6) +
+      '03' + // h1Flags
+      '04' + // xorKeyMaskClearBits
+      'cc'.repeat(16) + // xorKey
+      '00'.repeat(36);
+    const v2Header = v2Bit80 + v2Extra;
+
+    test('returns version 0 and no extras for an empty or short header', () => {
+      expect(Common.getBlockHeaderVersion(null)).toBe(0);
+      expect(Common.getBlockHeaderVersion(undefined)).toBe(0);
+      expect(Common.getBlockHeaderVersion('')).toBe(0);
+      expect(Common.getBlockHeaderVersion('00')).toBe(0);
+      expect(Common.getBlockHeaderV2Fields(null)).toBeNull();
+      expect(Common.getBlockHeaderV2Fields('')).toBeNull();
+    });
+
+    test('treats an 80-byte header as legacy', () => {
+      expect(legacy80.length).toBe(160);
+      expect(Common.getBlockHeaderVersion(legacy80)).toBe(0);
+      expect(Common.getBlockHeaderV2Fields(legacy80)).toBeNull();
+    });
+
+    test('parses extra fields from a 164-byte v2 header', () => {
+      expect(v2Header.length).toBe(328);
+      expect(Common.getBlockHeaderVersion(v2Header)).toBe(2);
+      expect(Common.getBlockHeaderV2Fields(v2Header)).toEqual({
+        nonce2: 1,
+        nonce3: 2,
+        extranonce: 'aa'.repeat(16),
+        h1Flags: 3,
+        xorKeyMaskClearBits: 4,
+        xorKey: 'cc'.repeat(16),
+      });
+    });
+
+    test('returns no extras when the v2 bit is set but the header is short', () => {
+      expect(Common.getBlockHeaderVersion(v2Bit80)).toBe(2);
+      expect(Common.getBlockHeaderV2Fields(v2Bit80)).toBeNull();
+      expect(Common.getBlockHeaderV2Fields(v2Header.slice(0, 326))).toBeNull();
+    });
+  });
 });
