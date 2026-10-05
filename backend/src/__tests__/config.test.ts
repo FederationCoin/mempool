@@ -15,7 +15,7 @@ describe('Mempool Backend Config', () => {
       expect(config.MEMPOOL).toStrictEqual({
         ENABLED: true,
         OFFICIAL: false,
-        NETWORK: 'mainnet',
+        NETWORK: 'testnet',
         BACKEND: 'none',
         BLOCKS_SUMMARIES_INDEXING: false,
         GOGGLES_INDEXING: false,
@@ -71,23 +71,23 @@ describe('Mempool Backend Config', () => {
 
       expect(config.CORE_RPC).toStrictEqual({
         HOST: '127.0.0.1',
-        PORT: 8332,
+        PORT: 35332,
         USERNAME: 'mempool',
         PASSWORD: 'mempool',
         TIMEOUT: 60000,
         COOKIE: false,
-        COOKIE_PATH: '/bitcoin/.cookie',
+        COOKIE_PATH: '/federationcoin/.cookie',
         DEBUG_LOG_PATH: '',
       });
 
       expect(config.SECOND_CORE_RPC).toStrictEqual({
         HOST: '127.0.0.1',
-        PORT: 8332,
+        PORT: 35332,
         USERNAME: 'mempool',
         PASSWORD: 'mempool',
         TIMEOUT: 60000,
         COOKIE: false,
-        COOKIE_PATH: '/bitcoin/.cookie'
+        COOKIE_PATH: '/federationcoin/.cookie'
       });
 
       expect(config.DATABASE).toStrictEqual({
@@ -123,10 +123,10 @@ describe('Mempool Backend Config', () => {
       });
 
       expect(config.EXTERNAL_DATA_SERVER).toStrictEqual({
-        MEMPOOL_API: 'https://mempool.space/api/v1',
-        MEMPOOL_ONION: 'http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api/v1',
-        LIQUID_API: 'https://liquid.network/api/v1',
-        LIQUID_ONION: 'http://liquidmom47f6s3m53ebfxn47p76a6tlnxib3wp6deux7wuzotdr6cyd.onion/api/v1'
+        MEMPOOL_API: '',
+        MEMPOOL_ONION: '',
+        LIQUID_API: '',
+        LIQUID_ONION: ''
       });
 
       expect(config.MAXMIND).toStrictEqual({
@@ -157,7 +157,7 @@ describe('Mempool Backend Config', () => {
       });
 
       expect(config.FIAT_PRICE).toStrictEqual({
-        ENABLED: true,
+        ENABLED: false,
         PAID: false,
         API_KEY: '',
       });

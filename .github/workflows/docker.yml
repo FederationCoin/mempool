@@ -98,6 +98,8 @@ jobs:
           tag = os.environ.get('TAG', '')
           
           # Replace image names with locally built test images
+          content = content.replace('image: federationcoin-mempool-frontend:local', f'image: test-frontend:{tag}')
+          content = content.replace('image: federationcoin-mempool-backend:local', f'image: test-backend:{tag}')
           content = content.replace('image: mempool/frontend:latest', f'image: test-frontend:{tag}')
           content = content.replace('image: mempool/backend:latest', f'image: test-backend:{tag}')
           
