@@ -1,0 +1,31 @@
+.alert {
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  margin: 0 10px 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.alert-danger {
+  background-color: #b71c1c;
+  border-color: #b71c1c;
+}
+
+.alert-warning {
+  background-color: #7a4a00;
+  border-color: #7a4a00;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 0 auto;
+}
+
+a {
+  color: #fff;
+  text-decoration: underline;
+}

@@ -3,6 +3,8 @@ name: Validate server config
 on:
   pull_request:
     types: [opened, synchronize]
+    branches:
+      - federationcoin
     paths:
       - "nginx.conf"
       - "http-basic.conf"

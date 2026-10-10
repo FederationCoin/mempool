@@ -1,0 +1,13 @@
+<div class="container p-lg-0 pb-0" style="max-width: 100%; margin-top: 7px" *ngIf="network$ | async as network">
+  <div class="alert mb-0 text-center" [class.alert-danger]="!network || network === 'mainnet'" [class.alert-warning]="!!network && network !== 'mainnet'" role="alert">
+    <div class="message-container">
+      @if (!network || network === 'mainnet') {
+        <span>Main is not live. Dummy MAIN identity is a placeholder. Do not mine default main. Use testnet.</span>
+      }
+      @if (network === 'testnet') {
+        <span>This is FederationCoin testnet, the public test chain. Coins have no value.</span>
+      }
+      <span>FederationCoin explorer. Experimental. Not Bitcoin. Not a CBDC. Not legal, tax, or securities advice. Corresponding source: <a href="https://github.com/FederationCoin/mempool" target="_blank" rel="noopener noreferrer">github.com/FederationCoin/mempool</a></span>
+    </div>
+  </div>
+</div>

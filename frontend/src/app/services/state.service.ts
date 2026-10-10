@@ -96,14 +96,14 @@ export interface Env {
 
 const defaultEnv: Env = {
   'MAINNET_ENABLED': true,
-  'TESTNET_ENABLED': false,
+  'TESTNET_ENABLED': true,
   'TESTNET4_ENABLED': false,
   'SIGNET_ENABLED': false,
   'REGTEST_ENABLED': false,
   'LIQUID_ENABLED': false,
   'LIQUID_TESTNET_ENABLED': false,
   'BASE_MODULE': 'mempool',
-  'ROOT_NETWORK': '',
+  'ROOT_NETWORK': 'testnet',
   'ITEMS_PER_PAGE': 10,
   'KEEP_BLOCKS_AMOUNT': 8,
   'OFFICIAL_MEMPOOL_SPACE': false,
@@ -114,8 +114,8 @@ const defaultEnv: Env = {
   'MEMPOOL_BLOCKS_AMOUNT': 8,
   'GIT_COMMIT_HASH': '',
   'PACKAGE_JSON_VERSION': '',
-  'MEMPOOL_WEBSITE_URL': 'https://mempool.space',
-  'LIQUID_WEBSITE_URL': 'https://liquid.network',
+  'MEMPOOL_WEBSITE_URL': 'https://mempool.federationcoin.org',
+  'LIQUID_WEBSITE_URL': '',
   'MINING_DASHBOARD': true,
   'LIGHTNING': false,
   'AUDIT': false,
@@ -129,14 +129,14 @@ const defaultEnv: Env = {
   'TESTNET4_TX_FIRST_SEEN_START_HEIGHT': 0,
   'SIGNET_TX_FIRST_SEEN_START_HEIGHT': 0,
   'REGTEST_TX_FIRST_SEEN_START_HEIGHT': 0,
-  'HISTORICAL_PRICE': true,
+  'HISTORICAL_PRICE': false,
   'ACCELERATOR': false,
-  'ACCELERATOR_BUTTON': true,
+  'ACCELERATOR_BUTTON': false,
   'PUBLIC_ACCELERATIONS': false,
   'ADDITIONAL_CURRENCIES': false,
   'STRATUM_ENABLED': false,
-  'SERVICES_API': 'https://mempool.space/api/v1/services',
-  'TWIDGET_API': 'https://mempool.ninja',
+  'SERVICES_API': '',
+  'TWIDGET_API': '',
   'PROD_DOMAINS': [],
 };
 
@@ -247,7 +247,7 @@ export class StateService {
     }
 
     if (document.location.hostname.endsWith('.onion')) {
-      this.env.SERVICES_API = 'http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api/v1/services';
+      this.env.SERVICES_API = this.env.SERVICES_API || '';
     }
 
     if (this.isBrowser) {
@@ -410,13 +410,19 @@ export class StateService {
     // (?:preview\/)?                               optional "preview" prefix (non-capturing)
     // (testnet|signet)/                            network string (captured as networkMatches[1])
     // ($|\/)                                       network string must end or end with a slash
-    let networkMatches: object = url.match(/^\/(?:[a-z]{2}(?:-[A-Z]{2})?\/)?(?:preview\/)?(testnet4?|signet|regtest)($|\/)/);
+    let networkMatches: object = url.match(/^\/(?:[a-z]{2}(?:-[A-Z]{2})?\/)?(?:preview\/)?(testnet4?|signet|regtest|mainnet)($|\/)/);
 
     if (!networkMatches && this.env.ROOT_NETWORK) {
       networkMatches = { 1: this.env.ROOT_NETWORK };
     }
 
     switch (networkMatches && networkMatches[1]) {
+      case 'mainnet':
+        if (this.network !== '') {
+          this.network = '';
+          this.networkChanged$.next('');
+        }
+        return;
       case 'signet':
         if (this.network !== 'signet') {
           this.network = 'signet';
@@ -473,15 +479,25 @@ export class StateService {
   }
   get networkDisplayName(): string {
     const labels: Record<string, string> = {
-      '': 'Mainnet',
+      '': 'Mainnet (placeholder)',
       'signet': 'Signet',
-      'testnet': 'Testnet3',
+      'testnet': 'Testnet',
       'testnet4': 'Testnet4',
       'regtest': 'Regtest',
       'liquid': 'Liquid',
       'liquidtestnet': 'Liquid Testnet',
     };
     return labels[this.network] ?? this.network;
+  }
+
+  /** URL prefix for the active network when ROOT_NETWORK is not that network. */
+  get networkApiPrefix(): string {
+    const root = this.env.ROOT_NETWORK || '';
+    const isMainnet = !this.network || this.network === 'mainnet';
+    if (isMainnet) {
+      return (root && root !== 'mainnet') ? '/mainnet' : '';
+    }
+    return this.network === root ? '' : '/' + this.network;
   }
   getHiddenProp(){
     const prefixes = ['webkit', 'moz', 'ms', 'o'];

@@ -16,7 +16,7 @@ export class AmountSelectorComponent implements OnInit {
 
   constructor(
     private formBuilder: UntypedFormBuilder,
-    private stateService: StateService,
+    public stateService: StateService,
     private storageService: StorageService,
   ) { }
 

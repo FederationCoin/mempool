@@ -5,9 +5,10 @@ about: Request a feature or suggest other enhancements
 
 <!--
    SUPPORT REQUESTS:
-   This is for requesting features in Mempool, not for support requests. 
-   If you have a support request, please reach out on Matrix:
-   https://matrix.to/#/#mempool.support:bitcoin.kyoto
+   This is for requesting features in the FederationCoin explorer fork, not
+   for support requests. Open a discussion or issue at
+   https://github.com/FederationCoin/mempool/issues
+   https://federationcoin.org
 -->
 
 ### Description

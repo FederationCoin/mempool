@@ -133,6 +133,15 @@ li.nav-item {
   position: relative;
 }
 
+.brand-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-right: 0.75rem;
+  white-space: nowrap;
+}
+
 .navbar-brand.dual-logos {
   justify-content: space-between;
   @media (max-width: 767.98px) {

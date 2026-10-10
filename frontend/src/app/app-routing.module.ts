@@ -186,7 +186,49 @@ const regtestRoutes: Routes = browserWindowEnv.REGTEST_ENABLED ? [
   },
 ] : [];
 
+const mainnetPrefixedRoutes: Routes = (browserWindowEnv.MAINNET_ENABLED && browserWindowEnv.ROOT_NETWORK && browserWindowEnv.ROOT_NETWORK !== 'mainnet') ? [
+  {
+    path: 'mainnet',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadChildren: () => import('@app/bitcoin-graphs.module').then(m => m.BitcoinGraphsModule),
+        data: { preload: true },
+      },
+      {
+        path: '',
+        loadChildren: () => import('@app/master-page.module').then(m => m.MasterPageModule),
+        data: { preload: true },
+      },
+      {
+        path: 'widget/wallet',
+        children: [],
+        component: AddressGroupComponent,
+        data: {
+          networkSpecific: true,
+        }
+      },
+      {
+        path: 'status',
+        data: { networks: ['bitcoin', 'liquid'] },
+        component: StatusViewComponent
+      },
+      {
+        path: '',
+        loadChildren: () => import('@app/bitcoin-graphs.module').then(m => m.BitcoinGraphsModule),
+        data: { preload: true },
+      },
+      {
+        path: '**',
+        redirectTo: '/mainnet'
+      },
+    ]
+  },
+] : [];
+
 let routes: Routes = [
+  ...mainnetPrefixedRoutes,
   ...testnetRoutes,
   ...testnet4Routes,
   ...signetRoutes,
@@ -221,6 +263,10 @@ let routes: Routes = [
     children: [
       {
         path: '',
+        loadChildren: () => import('@app/previews.module').then(m => m.PreviewsModule)
+      },
+      {
+        path: 'mainnet',
         loadChildren: () => import('@app/previews.module').then(m => m.PreviewsModule)
       },
       {

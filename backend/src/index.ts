@@ -146,6 +146,10 @@ class Server {
         res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         res.setHeader('Access-Control-Allow-Headers', 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With');
         res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count,X-Mempool-Auth');
+        if (req.method === 'OPTIONS') {
+          res.sendStatus(204);
+          return;
+        }
         next();
       })
       .use(express.urlencoded({ extended: true, limit: '10mb' }))
@@ -401,9 +405,7 @@ class Server {
     if (config.MEMPOOL_SERVICES.ACCELERATIONS) {
       accelerationRoutes.initRoutes(this.app);
     }
-    if (config.WALLETS.ENABLED) {
-      servicesRoutes.initRoutes(this.app);
-    }
+    servicesRoutes.initRoutes(this.app);
     if (!config.MEMPOOL.OFFICIAL) {
       aboutRoutes.initRoutes(this.app);
     }

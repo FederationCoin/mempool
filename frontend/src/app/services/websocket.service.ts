@@ -10,6 +10,7 @@ import { TransferState, makeStateKey } from '@angular/core';
 import { CacheService } from '@app/services/cache.service';
 import { uncompressDeltaChange, uncompressTx } from '@app/shared/common.utils';
 import { MinersService } from '@app/services/miners.service';
+import { webSocketUrlTemplate } from '@app/shared/api-host';
 
 const OFFLINE_RETRY_AFTER_MS = 2000;
 const OFFLINE_PING_CHECK_AFTER_MS = 30000;
@@ -22,7 +23,7 @@ const initData = makeStateKey('/api/v1/init-data');
 })
 export class WebsocketService {
   private webSocketProtocol = (document.location.protocol === 'https:') ? 'wss:' : 'ws:';
-  private webSocketUrl = this.webSocketProtocol + '//' + document.location.hostname + ':' + document.location.port + '{network}/api/v1/ws';
+  private webSocketUrl: string;
 
   private websocketSubject: WebSocketSubject<WebsocketResponse>;
   private goneOffline = false;
@@ -54,6 +55,13 @@ export class WebsocketService {
     private cacheService: CacheService,
     private minersService: MinersService,
   ) {
+    this.webSocketUrl = webSocketUrlTemplate(
+      this.stateService.env,
+      this.stateService.isBrowser,
+      this.webSocketProtocol,
+      document.location.hostname,
+      document.location.port,
+    );
     if (!this.stateService.isBrowser) {
       // @ts-ignore
       this.websocketSubject = { next: () => {}};
@@ -62,7 +70,7 @@ export class WebsocketService {
         .pipe(take(1))
         .subscribe((response) => this.handleResponse(response));
     } else {
-      this.network = this.stateService.network === this.stateService.env.ROOT_NETWORK ? '' : this.stateService.network;
+      this.network = this.stateService.networkApiPrefix.replace(/^\//, '');
       this.websocketSubject = webSocket<WebsocketResponse>(this.webSocketUrl.replace('{network}', this.network ? '/' + this.network : ''));
 
       const { response: theInitData } = this.transferState.get<any>(initData, null) || {};
@@ -78,11 +86,12 @@ export class WebsocketService {
         this.startSubscription();
       }
 
-      this.stateService.networkChanged$.subscribe((network) => {
-        if (network === this.network || (this.network === '' && network === this.stateService.env.ROOT_NETWORK)) {
+      this.stateService.networkChanged$.subscribe(() => {
+        const nextNetwork = this.stateService.networkApiPrefix.replace(/^\//, '');
+        if (nextNetwork === this.network) {
           return;
         }
-        this.network = network === this.stateService.env.ROOT_NETWORK ? '' : network;
+        this.network = nextNetwork;
         clearTimeout(this.onlineCheckTimeout);
         clearTimeout(this.onlineCheckTimeoutTwo);
 

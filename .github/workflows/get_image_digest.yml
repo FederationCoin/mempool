@@ -14,7 +14,9 @@ permissions:
 
 jobs:
   print-images-sha:
-    runs-on: mempool-ci
+    # images.federationcoin.org / private ECR -- not yet provisioned
+    if: false
+    runs-on: ubuntu-latest
     name: Print digest for images
     steps:
       - name: Checkout
