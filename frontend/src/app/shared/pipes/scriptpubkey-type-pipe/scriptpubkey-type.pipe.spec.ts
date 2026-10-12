@@ -3,8 +3,8 @@ import { ScriptpubkeyTypePipe } from './scriptpubkey-type.pipe';
 describe('ScriptpubkeyTypePipe', () => {
   const pipe = new ScriptpubkeyTypePipe();
 
-  it('labels v0_p2wpkh as secp', () => {
-    expect(pipe.transform('v0_p2wpkh')).toBe('secp');
+  it('labels v0_p2wpkh as SegWit', () => {
+    expect(pipe.transform('v0_p2wpkh')).toBe('SegWit');
   });
 
   it('labels v0_p2wsh as Dilithium', () => {
