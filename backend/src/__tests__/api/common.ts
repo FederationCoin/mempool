@@ -100,6 +100,7 @@ describe('Common', () => {
         h1Flags: 3,
         xorKeyMaskClearBits: 4,
         xorKey: 'cc'.repeat(16),
+        workKind: 0,
       });
     });
 
@@ -107,6 +108,13 @@ describe('Common', () => {
       expect(Common.getBlockHeaderVersion(v2Bit80)).toBe(2);
       expect(Common.getBlockHeaderV2Fields(v2Bit80)).toBeNull();
       expect(Common.getBlockHeaderV2Fields(v2Header.slice(0, 326))).toBeNull();
+    });
+
+    test('reads declared work kind from version bits 8-9', () => {
+      const kind1 = '00010080' + '00'.repeat(76) + v2Extra;
+      expect(Common.getBlockHeaderV2Fields(kind1)?.workKind).toBe(1);
+      const kind2 = '00020080' + '00'.repeat(76) + v2Extra;
+      expect(Common.getBlockHeaderV2Fields(kind2)?.workKind).toBe(2);
     });
   });
 });

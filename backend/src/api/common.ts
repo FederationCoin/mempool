@@ -649,6 +649,7 @@ export class Common {
       return parseInt(hex.substring(6, 8) + hex.substring(4, 6) + hex.substring(2, 4) + hex.substring(0, 2), 16);
     };
     // Offsets (in hex chars) follow the v2 header layout after the 80-byte base header (160 chars)
+    const version = parseInt(header.substring(6, 8) + header.substring(4, 6) + header.substring(2, 4) + header.substring(0, 2), 16);
     return {
       nonce2: readLE32(header.substring(160, 168)),
       nonce3: readLE32(header.substring(168, 176)),
@@ -656,6 +657,7 @@ export class Common {
       xorKeyMaskClearBits: parseInt(header.substring(222, 224), 16),
       h1Flags: parseInt(header.substring(220, 222), 16),
       xorKey: header.substring(224, 256),
+      workKind: (version >>> 8) & 3,
     };
   }
 
