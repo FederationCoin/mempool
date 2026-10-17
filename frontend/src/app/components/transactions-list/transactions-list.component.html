@@ -110,7 +110,10 @@
                           [similarity]="similarityMatches.get(tx.txid)?.get(vin.prevout.scriptpubkey_address)"
                         ></app-address-text>
                         <ng-template #vinScriptPubkeyType>
-                          {{ vin.prevout.scriptpubkey_type?.toUpperCase() }}
+                          <app-spend-chip [kind]="inputSpendKind(vin)"></app-spend-chip>
+                          @if (!inputSpendKind(vin)) {
+                            {{ vin.prevout.scriptpubkey_type?.toUpperCase() }}
+                          }
                         </ng-template>
                         <div>
                           <app-address-labels  [vin]="vin" [channel]="tx._channels && tx._channels.inputs[vindex] ? tx._channels.inputs[vindex] : null"></app-address-labels>
@@ -291,7 +294,12 @@
                         </tr>
                         <tr>
                           <td i18n="transactions-list.previous-output-type">Previous output type</td>
-                          <td style="text-align: left;">{{ vin.prevout.scriptpubkey_type?.toUpperCase() }}</td>
+                          <td style="text-align: left;">
+                            <app-spend-chip [kind]="inputSpendKind(vin)"></app-spend-chip>
+                            @if (!inputSpendKind(vin)) {
+                              {{ vin.prevout.scriptpubkey_type?.toUpperCase() }}
+                            }
+                          </td>
                         </tr>
                     </ng-template>
                     </tbody>
@@ -373,7 +381,12 @@
                             }
                           </a>
                       </ng-template>
-                      <ng-template #otherPubkeyType>{{ vout.scriptpubkey_type | scriptpubkeyType }}</ng-template>
+                      <ng-template #otherPubkeyType>
+                        <app-spend-chip [kind]="outputSpendKind(vout.scriptpubkey_type)"></app-spend-chip>
+                        @if (!outputSpendKind(vout.scriptpubkey_type)) {
+                          {{ vout.scriptpubkey_type | scriptpubkeyType }}
+                        }
+                      </ng-template>
                     </ng-template>
                   </ng-template>
                 </td>
@@ -483,7 +496,12 @@
                       </tr>
                       <tr *ngIf="vout.scriptpubkey_type">
                         <td i18n="transactions-list.vout.scriptpubkey-type">Type</td>
-                        <td style="text-align: left;">{{ vout.scriptpubkey_type.toUpperCase() }}</td>
+                        <td style="text-align: left;">
+                          <app-spend-chip [kind]="outputSpendKind(vout.scriptpubkey_type)"></app-spend-chip>
+                          @if (!outputSpendKind(vout.scriptpubkey_type)) {
+                            {{ vout.scriptpubkey_type.toUpperCase() }}
+                          }
+                        </td>
                       </tr>
                     </tbody>
                   </table>

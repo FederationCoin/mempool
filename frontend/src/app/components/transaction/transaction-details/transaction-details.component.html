@@ -223,6 +223,11 @@
           <span class="oobFees" i18n-ngbTooltip="Acceleration Fees" ngbTooltip="Acceleration fees paid out-of-band"> +{{ accelerationInfo?.bidBoost ?? tx.feeDelta | number }} </span><span class="symbol" i18n="shared.tokens">tokens</span>
         }
         <span class="fiat"><app-fiat *ngIf="tx.fee >= 0" [blockConversion]="tx.price" [value]="tx.fee + (isAcceleration ? ((accelerationInfo?.bidBoost ?? tx.feeDelta) || 0) : 0)"></app-fiat></span>
+        @if (tx.vin?.[0]?.is_coinbase) {
+          <app-min-fee-exempt></app-min-fee-exempt>
+        } @else {
+          <app-min-fee-paid [fee]="tx.fee ?? 0" [weight]="tx.weight"></app-min-fee-paid>
+        }
       </td>
     </tr>
   } @else {

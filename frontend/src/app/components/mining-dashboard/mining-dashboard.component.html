@@ -36,13 +36,11 @@
       </div>
     </div>
 
-    <!-- hashrate -->
+    <!-- hashrate per work kind (never a sum of the four) -->
     <div class="col" style="margin-bottom: 1.47rem">
       <div class="card">
         <div class="card-body ps-lg-3 pe-lg-3 ps-2 pe-2">
-          <div class="fixed-mempool-graph">
-            <app-hashrate-chart [height]="hashrateGraphHeight" [attr.data-cy]="'hashrate-graph'" [widget]="true"></app-hashrate-chart>
-          </div>
+          <app-work-kind-mining [blocks]="(stateService.blocks$ | async) || []"></app-work-kind-mining>
           <div class="mt-1"><a [routerLink]="['/graphs/mining/hashrate-difficulty' | relativeUrl]" fragment="1y" i18n="dashboard.view-more">View more &raquo;</a></div>
         </div>
       </div>
