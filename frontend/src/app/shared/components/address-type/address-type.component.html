@@ -6,10 +6,10 @@
     <span i18n="address.empty">empty</span>
   }
   @case ('v0_p2wpkh') {
-    <span>P2WPKH</span>
+    <app-spend-chip [kind]="spendKind"></app-spend-chip>
   }
   @case ('v0_p2wsh') {
-    <span>P2WSH</span>
+    <app-spend-chip [kind]="spendKind"></app-spend-chip>
   }
   @case ('v1_p2tr') {
     <span>P2TR</span>

@@ -307,6 +307,8 @@ export interface BlockHeaderV2 {
   h1Flags: number;
   xorKey: string;
   xorKeyMaskClearBits: number;
+  /** Declared work kind from version bits 8–9. 0 Blake2b, 1 SHA-256d, 2 FP8, 3 Poseidon2. */
+  workKind: number;
 }
 
 export interface BlockExtension {

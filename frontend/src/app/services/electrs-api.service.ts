@@ -23,9 +23,9 @@ export class ElectrsApiService {
     if (!stateService.isBrowser) { // except when inside AU SSR process
       this.apiBaseUrl = this.stateService.env.NGINX_PROTOCOL + '://' + this.stateService.env.NGINX_HOSTNAME + ':' + this.stateService.env.NGINX_PORT;
     }
-    this.apiBasePath = ''; // assume mainnet by default
-    this.stateService.networkChanged$.subscribe((network) => {
-      this.apiBasePath = network && network !== this.stateService.env.ROOT_NETWORK ? '/' + network : '';
+    this.apiBasePath = this.stateService.networkApiPrefix;
+    this.stateService.networkChanged$.subscribe(() => {
+      this.apiBasePath = this.stateService.networkApiPrefix;
     });
   }
 

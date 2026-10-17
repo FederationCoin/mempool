@@ -13,14 +13,13 @@ import { EventType, NavigationStart, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MiningDashboardComponent implements OnInit, AfterViewInit {
-  hashrateGraphHeight = 335;
   poolGraphHeight = 375;
 
   constructor(
     private seoService: SeoService,
     private ogService: OpenGraphService,
     private websocketService: WebsocketService,
-    private stateService: StateService,
+    public stateService: StateService,
     private router: Router
   ) { }
 
@@ -46,13 +45,10 @@ export class MiningDashboardComponent implements OnInit, AfterViewInit {
   @HostListener('window:resize', ['$event'])
   onResize(): void {
     if (window.innerWidth >= 992) {
-      this.hashrateGraphHeight = 335;
       this.poolGraphHeight = 375;
     } else if (window.innerWidth >= 768) {
-      this.hashrateGraphHeight = 245;
       this.poolGraphHeight = 265;
     } else {
-      this.hashrateGraphHeight = 240;
       this.poolGraphHeight = 240;
     }
   }

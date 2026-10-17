@@ -54,14 +54,13 @@
                 <app-fee-rate unitClass=""></app-fee-rate>
               </div>
             </ng-template>
-            <div [attr.data-cy]="'bitcoin-block-' + offset + '-index-' + i + '-total-fees'" *ngIf="blockDisplayMode === 'fees'; else noMiningInfo"
-              class="block-size">
+            <div [attr.data-cy]="'bitcoin-block-' + offset + '-index-' + i + 'block-size'"
+              class="block-size" data-block-size [innerHTML]="'&lrm;' + (block.size | bytes: 2)"></div>
+            <div [attr.data-cy]="'bitcoin-block-' + offset + '-index-' + i + '-total-fees'" *ngIf="blockDisplayMode === 'fees'"
+              class="block-size" data-block-fees>
               <app-amount [satoshis]="block.extras?.totalFees ?? 0" digitsInfo="1.2-3" [noFiat]="true"></app-amount>
             </div>
-            <ng-template #noMiningInfo>
-            <div [attr.data-cy]="'bitcoin-block-' + offset + '-index-' + i + 'block-size'"
-              class="block-size" [innerHTML]="'&lrm;' + (block.size | bytes: 2)"></div>
-            </ng-template>
+            <app-leftover-saturated [weight]="block.weight"></app-leftover-saturated>
             <div [attr.data-cy]="'bitcoin-block-' + i + '-transactions'" class="transaction-count">
               <ng-container
                 *ngTemplateOutlet="block.tx_count === 1 ? transactionsSingular : transactionsPlural; context: {$implicit: block.tx_count | number}"></ng-container>
@@ -76,8 +75,9 @@
             </div>
           </ng-container>
         </div>
-        <div class="animated" *ngIf="block.extras?.pool != undefined && showPools">
-          <a [attr.data-cy]="'bitcoin-block-' + offset + '-index-' + i + '-pool'" class="badge" [class.miner-name]="block.extras.pool.minerNames?.length > 1 && block.extras.pool.minerNames[1] != ''" [routerLink]="[('/mining/pool/' + block.extras.pool.slug) | relativeUrl]">
+        <div class="animated">
+          <app-kind-chip [version]="block.version"></app-kind-chip>
+          <a *ngIf="block.extras?.pool != undefined && showPools" [attr.data-cy]="'bitcoin-block-' + offset + '-index-' + i + '-pool'" class="badge" [class.miner-name]="block.extras.pool.minerNames?.length > 1 && block.extras.pool.minerNames[1] != ''" [routerLink]="[('/mining/pool/' + block.extras.pool.slug) | relativeUrl]">
             <ng-container *ngIf="block.extras.pool.minerNames?.length > 1 && block.extras.pool.minerNames[1] != ''; else centralisedPool">
               <ng-container *ngIf="block.extras.pool.minerSlug && block.extras.pool.minerName; else minerName">
                 <app-mining-pool [slug]="block.extras.pool.minerSlug" [name]="block.extras.pool.minerName" [showName]="false"></app-mining-pool>

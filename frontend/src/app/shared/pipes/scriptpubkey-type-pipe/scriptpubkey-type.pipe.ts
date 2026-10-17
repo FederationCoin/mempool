@@ -14,6 +14,10 @@ export class ScriptpubkeyTypePipe implements PipeTransform {
         return 'P2PK';
       case 'op_return':
         return 'OP_RETURN';
+      case 'v0_p2wpkh':
+        return 'SW';
+      case 'v0_p2wsh':
+        return 'DIL';
       default:
         return value.toUpperCase();
     }

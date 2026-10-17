@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   print-backend-sha:
-    runs-on: mempool-ci
+    runs-on: ubuntu-latest
     name: Print backend hashes
     steps:
       - name: Checkout

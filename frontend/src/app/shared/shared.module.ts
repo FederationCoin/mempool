@@ -107,6 +107,7 @@ import { ConfirmationsComponent } from '@app/shared/components/confirmations/con
 import { ToggleComponent } from '@app/shared/components/toggle/toggle.component';
 import { GeolocationComponent } from '@app/shared/components/geolocation/geolocation.component';
 import { TestnetAlertComponent } from '@app/shared/components/testnet-alert/testnet-alert.component';
+import { FederationAlertComponent } from '@app/shared/components/federation-alert/federation-alert.component';
 import { LiquidIncidentAlertComponent } from '@app/shared/components/liquid-incident-alert/liquid-incident-alert.component';
 import { GlobalFooterComponent } from '@app/shared/components/global-footer/global-footer.component';
 import { MempoolErrorComponent } from '@app/shared/components/mempool-error/mempool-error.component';
@@ -136,6 +137,11 @@ import { BitcoinInvoiceComponent } from '@components/bitcoin-invoice/bitcoin-inv
 
 import { OnlyVsizeDirective, OnlyWeightDirective } from '@app/shared/components/weight-directives/weight-directives';
 import { GithubLogin } from '@components/github-login.component/github-login.component';
+import { KindChipComponent } from '@app/shared/components/kind-chip/kind-chip.component';
+import { SpendChipComponent } from '@app/shared/components/spend-chip/spend-chip.component';
+import { LeftoverSaturatedComponent } from '@app/shared/components/leftover-saturated/leftover-saturated.component';
+import { MinFeeExemptComponent, MinFeePaidComponent } from '@app/shared/components/min-fee-split/min-fee-split.component';
+import { WorkKindMiningComponent } from '@app/shared/components/work-kind-mining/work-kind-mining.component';
 
 @NgModule({
   declarations: [
@@ -236,6 +242,7 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
     ToggleComponent,
     GeolocationComponent,
     TestnetAlertComponent,
+    FederationAlertComponent,
     LiquidIncidentAlertComponent,
     GlobalFooterComponent,
     MiningPoolComponent,
@@ -267,6 +274,12 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
   ],
   imports: [
     CommonModule,
+    KindChipComponent,
+    SpendChipComponent,
+    LeftoverSaturatedComponent,
+    MinFeeExemptComponent,
+    MinFeePaidComponent,
+    WorkKindMiningComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -385,6 +398,12 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
     BtcComponent,
     FeeRateComponent,
     AddressTypeComponent,
+    KindChipComponent,
+    SpendChipComponent,
+    LeftoverSaturatedComponent,
+    MinFeeExemptComponent,
+    MinFeePaidComponent,
+    WorkKindMiningComponent,
     AddressTextComponent,
     TruncateComponent,
     SearchResultsComponent,
@@ -393,6 +412,7 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
     ToggleComponent,
     GeolocationComponent,
     TestnetAlertComponent,
+    FederationAlertComponent,
     LiquidIncidentAlertComponent,
     MiningPoolComponent,
     PreviewTitleComponent,

@@ -247,6 +247,7 @@ export interface BlockHeaderV2 {
   h1Flags: number;
   xorKey: string;
   xorKeyMaskClearBits: number;
+  workKind: number;
 }
 
 export interface BlockExtended extends Block {

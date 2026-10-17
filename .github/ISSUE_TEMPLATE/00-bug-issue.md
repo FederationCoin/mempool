@@ -5,9 +5,10 @@ about: Report bugs (no support requests, please)
 
 <!--
    SUPPORT REQUESTS:
-   This is for reporting bugs in Mempool, not for support requests. 
-   If you have a support request, please reach out on Matrix:
-   https://matrix.to/#/#mempool.support:bitcoin.kyoto
+   This is for reporting bugs in the FederationCoin explorer fork, not for
+   support requests. Open a discussion or issue at
+   https://github.com/FederationCoin/mempool/issues
+   https://federationcoin.org
 -->
 
 ### Description

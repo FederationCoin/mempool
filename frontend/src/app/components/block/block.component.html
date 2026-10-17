@@ -374,7 +374,11 @@
                 <ng-container *ngIf="block?.extras?.headerV2 as headerV2">
                   <tr>
                     <td i18n="block.header-version">Header version</td>
-                    <td>{{ block.extras.headerVersion }} <span class="badge bg-success ms-1" title="BLAKE2b proof-of-work header">BLAKE2b</span></td>
+                    <td>{{ block.extras.headerVersion }}</td>
+                  </tr>
+                  <tr>
+                    <td i18n="block.work-kind">Work kind</td>
+                    <td><app-kind-chip [version]="block.version"></app-kind-chip></td>
                   </tr>
                   <tr>
                     <td i18n="block.nonce2">Nonce2</td>
