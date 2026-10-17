@@ -137,6 +137,11 @@ import { BitcoinInvoiceComponent } from '@components/bitcoin-invoice/bitcoin-inv
 
 import { OnlyVsizeDirective, OnlyWeightDirective } from '@app/shared/components/weight-directives/weight-directives';
 import { GithubLogin } from '@components/github-login.component/github-login.component';
+import { KindChipComponent } from '@app/shared/components/kind-chip/kind-chip.component';
+import { SpendChipComponent } from '@app/shared/components/spend-chip/spend-chip.component';
+import { LeftoverSaturatedComponent } from '@app/shared/components/leftover-saturated/leftover-saturated.component';
+import { MinFeeExemptComponent, MinFeePaidComponent } from '@app/shared/components/min-fee-split/min-fee-split.component';
+import { WorkKindMiningComponent } from '@app/shared/components/work-kind-mining/work-kind-mining.component';
 
 @NgModule({
   declarations: [
@@ -269,6 +274,12 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
   ],
   imports: [
     CommonModule,
+    KindChipComponent,
+    SpendChipComponent,
+    LeftoverSaturatedComponent,
+    MinFeeExemptComponent,
+    MinFeePaidComponent,
+    WorkKindMiningComponent,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -387,6 +398,12 @@ import { GithubLogin } from '@components/github-login.component/github-login.com
     BtcComponent,
     FeeRateComponent,
     AddressTypeComponent,
+    KindChipComponent,
+    SpendChipComponent,
+    LeftoverSaturatedComponent,
+    MinFeeExemptComponent,
+    MinFeePaidComponent,
+    WorkKindMiningComponent,
     AddressTextComponent,
     TruncateComponent,
     SearchResultsComponent,
